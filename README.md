@@ -7,14 +7,19 @@ A telegram bot based on a finite state machine
 ## Step1
 
 cd TOC-Project-2017
+
 cd myenv
+
 source bin/activate
+
 cd ..
 
 ## Step2
 
 open a new terminal
+
 do step 1
+
 ./ngrok http 5000
 
 After that, `ngrok` would generate a https URL.
@@ -24,6 +29,7 @@ You should set `WEBHOOK_URL` (in app.py) to `your-https-URL/hook`.
 ## Step3
 
 use terminal in step 1
+
 python3 app.py
 
 ## Finite State Machine
