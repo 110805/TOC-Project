@@ -4,58 +4,50 @@ Template Code for TOC Project 2017
 
 A telegram bot based on a finite state machine
 
-## Setup
+## Step1
 
-### Prerequisite
-* Python 3
+cd TOC-Project-2017
+cd myenv
+source bin/activate
+cd ..
 
-#### Install Dependency
-```sh
-pip install -r requirements.txt
-```
+## Step2
 
-* pygraphviz (For visualizing Finite State Machine)
-    * [Setup pygraphviz on Ubuntu](http://www.jianshu.com/p/a3da7ecc5303)
-
-### Secret Data
-
-`API_TOKEN` and `WEBHOOK_URL` in app.py **MUST** be set to proper values.
-Otherwise, you might not be able to run your code.
-
-### Run Locally
-You can either setup https server or using `ngrok` as a proxy.
-
-**`ngrok` would be used in the following instruction**
-
-```sh
-ngrok http 5000
-```
+open a new terminal
+do step 1
+./ngrok http 5000
 
 After that, `ngrok` would generate a https URL.
 
 You should set `WEBHOOK_URL` (in app.py) to `your-https-URL/hook`.
 
-#### Run the sever
+## Step3
 
-```sh
+use terminal in step 1
 python3 app.py
-```
 
 ## Finite State Machine
 ![fsm](./img/show-fsm.png)
 
 ## Usage
-The initial state is set to `user`.
+The initial state is set to `init`.
 
-Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
+* init
+	* Input: "hello"
+		* Reply: "Hi!"
+        * Go back to state init
 
-* user
-	* Input: "go to state1"
-		* Reply: "I'm entering state1"
+	* Input: "name"
+		* Reply: "My name is Jibot, an interesting name"
+        * Reply: "What's your name?"
+        * User reply: "Your name"
+        * Reply: "A great name, nice to meet you"
+        * Go back to state init
 
-	* Input: "go to state2"
-		* Reply: "I'm entering state2"
+    * Input: "recommend"
+        * Reply: "sport,movie,or news"
+        * If user reply "sport" or "movie" or "news", Jibot will give user a          website which user wants to find, and then go to recommend state
+        * If user reply "exit", go back to state init. And reply: "See you 
+          next time"
 
 
-## Author
-[Lee-W](https://github.com/Lee-W)

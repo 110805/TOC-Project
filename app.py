@@ -18,7 +18,11 @@ machine = TocMachine(
         'hello',
         'name',
         'reply_name',
-        'recommend'
+        'recommend',
+        'sport',
+        'movie',
+        'news',
+        'exit'
     ],
     transitions=[
         {
@@ -46,9 +50,38 @@ machine = TocMachine(
             'conditions':'choice'
         },
         {
+            'trigger':'advance',
+            'source':'recommend',
+            'dest':'sport',
+            'conditions':'go_sport'
+        },
+        {
+            'trigger':'advance',
+            'source':'recommend',
+            'dest':'movie',
+            'conditions':'go_movie'
+        },
+        {
+            'trigger':'advance',
+            'source':'recommend',
+            'dest':'news',
+            'conditions':'go_news'
+        },
+        {
+            'trigger':'advance',
+            'source':'recommend',
+            'dest':'exit',
+            'conditions':'go_exit'
+        },
+        {
             'trigger':'go_back',
-            'source':['hello','name'],
-            'dest':'init',
+            'source':['hello','reply_name','exit'],
+            'dest':'init'
+        },
+        {
+            'trigger':'go_recommend',
+            'source':['sport','movie','news'],
+            'dest':'recommend',
         }
     ],
     initial='init',
