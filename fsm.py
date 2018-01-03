@@ -8,24 +8,31 @@ class TocMachine(GraphMachine):
             **machine_configs
         )
 
-    def is_going_to_state1(self, update):
+    def say_hi(self, update):
         text = update.message.text
-        return text.lower() == 'go to state1'
+        return text.lower() == 'hello'
 
-    def is_going_to_state2(self, update):
+    def say_name(self, update):
         text = update.message.text
-        return text.lower() == 'go to state2'
+        return text.lower() == 'name'
 
-    def on_enter_state1(self, update):
-        update.message.reply_text("I'm entering state1")
+    def reply(self,update):
+        return 1
+
+    def choice(self, update):
+        text = update.message.text
+        return text.lower() == 'recognize something'
+
+    def on_enter_hello(self, update):
+        update.message.reply_text("Hi!")
         self.go_back(update)
 
-    def on_exit_state1(self, update):
-        print('Leaving state1')
+    def on_enter_name(self, update):
+        update.message.reply_text("My name is Jibot, an interesting name?")
+        update.message.reply_text("What's your name?")
+    
+    def on_enter_reply_name(self,update):
+        update.message.reply_text("A great name,nice to meet you")
 
-    def on_enter_state2(self, update):
-        update.message.reply_text("I'm entering state2")
-        self.go_back(update)
-
-    def on_exit_state2(self, update):
-        print('Leaving state2')
+    def on_enter_recognize(self,update):
+        update.message.reply_text("sport,movie or news")
